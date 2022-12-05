@@ -1,0 +1,78 @@
+---
+- hosts: staging
+
+  tasks:
+    - name: Remove previous deployment
+      file:
+        path: /home/deploy/app/previous
+        state: absent
+
+    - name: Find current deployment
+      stat:
+        path: /home/deploy/app/current
+      register: current_deployment
+
+    - name: Stop current deployment process
+      command: pm2 stop blog
+      when: current_deployment.stat.exists
+      ignore_errors: yes
+
+    - name: Delete current deployment process
+      command: pm2 delete blog
+      when: current_deployment.stat.exists
+      ignore_errors: yes
+
+    - name: Backup current deployment
+      command: mv /home/deploy/app/current /home/deploy/app/previous
+      when: current_deployment.stat.exists
+
+    - name: Backup current DB
+      command: cp /home/deploy/app/db/production.db /home/deploy/app/db/backup.db
+
+    - name: Make a directory for release asset
+      file:
+        path: /home/deploy/downloads
+        state: directory
+
+    - name: Download latest release
+      command: gh release download -p "blog*.tgz" -D /home/deploy/downloads -R i9or/blog --clobber
+
+    - name: Find release archive
+      find:
+        paths: /home/deploy/downloads
+        patterns: "*.tgz"
+      register: release_archive_file
+
+    - name: Extract release archive
+      unarchive:
+        src: "{{ item.path }}"
+        dest: /home/deploy/downloads/
+        remote_src: yes
+      loop: "{{ release_archive_file.files }}"
+
+    - name: Make extracted release current
+      command: mv /home/deploy/downloads/package /home/deploy/app/current
+
+    - name: Cleanup downloads
+      file:
+        path: /home/deploy/downloads
+        state: absent
+
+    - name: Install application dependencies
+      npm:
+        path: /home/deploy/app/current
+        ci: yes
+        production: yes
+
+    - name: Run migrations
+      command: npm run db:migrate
+      args:
+        chdir: /home/deploy/app/current
+
+    - name: Start current deployment process
+      command: pm2 start ./dist/index.js --name blog
+      args:
+        chdir: /home/deploy/app/current
+
+    - name: Freeze a process list
+      command: pm2 save
