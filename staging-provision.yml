@@ -8,6 +8,8 @@
         value: 3000
       - key: DB_FILENAME
         value: /home/deploy/app/db/production.db
+      - key: NODE_ENV
+        value: production
 
   tasks:
     - name: Install dependencies
