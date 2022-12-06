@@ -1,0 +1,9 @@
+---
+- name: Backup current release
+  import_tasks: backup_current_release.yml
+
+- name: Download new release and make it current
+  import_tasks: new_release.yml
+
+- name: Run new release
+  import_tasks: run_new_release.yml

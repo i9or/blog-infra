@@ -1,0 +1,4 @@
+---
+db_path: /path/to/app/db
+db_filename: '{{ vars["db_path"] + "/production.db" }}'
+

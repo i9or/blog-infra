@@ -1,0 +1,28 @@
+- name: Make a directory for release asset
+  file:
+    path: '{{ downloads_path }}'
+    state: directory
+
+- name: Download latest release
+  command: "gh release download -p \"blog*.tgz\" -D {{ downloads_path }} -R i9or/blog --clobber"
+
+- name: Find release archive
+  find:
+    paths: '{{ downloads_path }}'
+    patterns: "*.tgz"
+  register: release_archive_file
+
+- name: Extract release archive
+  unarchive:
+    src: "{{ item.path }}"
+    dest: '{{ downloads_path }}'
+    remote_src: yes
+  loop: "{{ release_archive_file.files }}"
+
+- name: Make extracted release current
+  command: "mv /home/deploy/downloads/package {{ current_release_path }}"
+
+- name: Cleanup downloads
+  file:
+    path: '{{ downloads_path }}'
+    state: absent

@@ -1,0 +1,22 @@
+- name: Install dependencies
+  apt:
+    name:
+      - curl
+      - gnupg2
+      - sqlite3
+    state: present
+
+- name: Populate environment variables
+  lineinfile:
+    dest: /etc/environment
+    state: present
+    regexp: "^{{ item.key }}="
+    line: "{{ item.key }}={{ item.value }}"
+  loop: "{{ os_environment }}"
+
+- name: Populate GitHub token
+  lineinfile:
+    dest: /etc/environment
+    state: present
+    line: "GH_TOKEN={{ gh_token }}"
+  no_log: yes

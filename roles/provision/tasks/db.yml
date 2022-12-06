@@ -1,0 +1,22 @@
+- name: Check if DB already exists
+  stat:
+    path: '{{ db_filename }}'
+  register: production_db
+
+- name: Create DB directory
+  file:
+    path: '{{ db_path }}'
+    state: directory
+    owner: deploy
+    group: deploy
+  when: not production_db.stat.exists
+
+- name: Create empty DB
+  file:
+    path: '{{ db_filename }}'
+    state: touch
+    owner: deploy
+    group: deploy
+    modification_time: preserve
+    access_time: preserve
+  when: not production_db.stat.exists

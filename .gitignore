@@ -2,3 +2,7 @@ keys/*
 !keys/.gitkeep
 
 hosts.ini
+
+vars/*
+!vars/common.yml.example
+!vars/provision.yml.example
