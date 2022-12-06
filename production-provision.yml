@@ -1,0 +1,9 @@
+---
+- hosts: production
+  become: yes
+  vars_files:
+    - "./vars/common.yml"
+    - "./vars/provision.yml"
+  roles:
+    - provision
+
