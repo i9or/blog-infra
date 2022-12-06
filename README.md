@@ -20,3 +20,17 @@ Key naming:
 * `staging_key` — SSH key for staging `deploy` user
 
 **Note: `./keys/` folder should be added to `.gitignore`!**
+
+## Provision
+
+Some steps are still manual, host that needs to be provisioned have to have `deploy` user.
+
+To provision staging environment:
+
+```commandline
+ansible-playbook staging-provision.yml 
+```
+
+Another manual step is to run `pm2 startup` command and follow its instruction.
+
+The same goes for production environment, but `production-provision.yml` playbooks needs to be used.
