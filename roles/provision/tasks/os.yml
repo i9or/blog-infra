@@ -20,3 +20,10 @@
     state: present
     line: "GH_TOKEN={{ gh_token }}"
   no_log: yes
+
+- name: Populate secret for session tokens
+  lineinfile:
+    dest: /etc/environment
+    state: present
+    line: "SECRET={{ session_secret }}"
+  no_log: yes

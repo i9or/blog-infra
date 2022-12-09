@@ -1,2 +1,3 @@
 ---
 gh_token: "Your GitHub PAT here"
+session_secret: "Your secret here"
