@@ -1,2 +1,8 @@
 ---
-# vars file for provision
+os_environment:
+  - key: PORT
+    value: 3000
+  - key: DB_FILENAME
+    value: '{{ vars["db_filename"] }}'
+  - key: NODE_ENV
+    value: production
