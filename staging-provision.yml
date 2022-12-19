@@ -4,6 +4,7 @@
   vars_files:
     - "./vars/common.yml"
     - "./vars/provision.yml"
+    - "./vars/staging.yml"
   roles:
     - provision
 

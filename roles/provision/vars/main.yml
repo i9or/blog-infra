@@ -1,8 +1,20 @@
 ---
 os_environment:
-  - key: PORT
+  - key: NODE_ENV
+    value: production
+  - key: BLOG_PORT
     value: 3000
   - key: DB_FILENAME
     value: '{{ vars["db_filename"] }}'
-  - key: NODE_ENV
-    value: production
+  - key: ADMIN_PORT
+    value: 3001
+  - key: API_HOST
+    value: '{{ vars["api_host"] }}'
+  - key: SALT_ROUNDS
+    value: 10
+  - key: CLIENT_ORIGINS
+    value: '{{ vars["client_origins"] }}'
+  - key: BLOG_DOMAIN
+    value: '{{ vars["blog_domain"] }}'
+  - key: MORE_SECURE
+    value: '{{ vars["more_secure"] }}'

@@ -1,0 +1,5 @@
+---
+api_host: "https://api.host.com"
+client_origins: "\'[\"https://client.host.com\"]\'"
+blog_domain: "host.com"
+more_secure: "true"

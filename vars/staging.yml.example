@@ -1,0 +1,5 @@
+---
+api_host: "http://api.host"
+client_origins: "\'[\"http://clinet.host\"]\'"
+blog_domain: "host"
+more_secure: "false"

@@ -6,3 +6,5 @@ hosts.ini
 vars/*
 !vars/common.yml.example
 !vars/provision.yml.example
+!vars/staging.yml.example
+!vars/production.yml.example

@@ -25,5 +25,5 @@
   lineinfile:
     dest: /etc/environment
     state: present
-    line: "SECRET={{ session_secret }}"
+    line: "BLOG_SECRET={{ session_secret }}"
   no_log: yes
