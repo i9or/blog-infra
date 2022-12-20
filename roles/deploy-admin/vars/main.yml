@@ -1,0 +1,4 @@
+---
+downloads_path: /home/deploy/downloads-admin
+previous_release_path: /home/deploy/admin/previous
+current_release_path: /home/deploy/admin/current

@@ -34,3 +34,12 @@ ansible-playbook staging-provision.yml
 Another manual step is to run `pm2 startup` command and follow its instruction.
 
 The same goes for production environment, but `production-provision.yml` playbooks needs to be used.
+
+### Environment variables
+
+Sometimes PM2 doesn't start services with new environment variables,
+to force variables update command below needs to be run:
+
+```commandline
+ansible staging -a "pm2 restart all -a"
+```

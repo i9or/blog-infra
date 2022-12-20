@@ -1,0 +1,13 @@
+- name: Install application dependencies
+  npm:
+    path: '{{ current_release_path }}'
+    ci: yes
+    production: yes
+
+- name: Start current deployment process
+  command: pm2 start ./server/server.mjs --name blog-admin
+  args:
+    chdir: '{{ current_release_path }}'
+
+- name: Freeze a process list
+  command: pm2 save

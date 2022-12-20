@@ -1,0 +1,23 @@
+- name: Remove previous deployment
+  file:
+    path: '{{ previous_release_path }}'
+    state: absent
+
+- name: Find current deployment
+  stat:
+    path: '{{ current_release_path }}'
+  register: current_admin_deployment
+
+- name: Stop current deployment process
+  command: pm2 stop blog-admin
+  when: current_admin_deployment.stat.exists
+  ignore_errors: yes
+
+- name: Delete current deployment process
+  command: pm2 delete blog-admin
+  when: current_admin_deployment.stat.exists
+  ignore_errors: yes
+
+- name: Backup current deployment
+  command: "mv {{ current_release_path }} {{ previous_release_path }}"
+  when: current_admin_deployment.stat.exists
