@@ -37,8 +37,8 @@ The same goes for production environment, but `production-provision.yml` playboo
 
 ### Environment variables
 
-Sometimes PM2 doesn't start services with new environment variables,
-to force variables update command below needs to be run:
+Sometimes PM2 doesn't start services with new environment variables.
+Command below forces PM2 to update environment variables to the latest version:
 
 ```commandline
 ansible staging -a "pm2 restart all -a"
