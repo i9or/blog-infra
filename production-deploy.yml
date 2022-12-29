@@ -4,3 +4,4 @@
     - "./vars/common.yml"
   roles:
     - deploy-blog
+    - deploy-admin

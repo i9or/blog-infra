@@ -33,7 +33,7 @@ ansible-playbook staging-provision.yml
 
 Another manual step is to run `pm2 startup` command and follow its instruction.
 
-The same goes for production environment, but `production-provision.yml` playbooks needs to be used.
+The same goes for production environment, but `production-provision.yml` playbook needs to be used.
 
 ### Environment variables
 
