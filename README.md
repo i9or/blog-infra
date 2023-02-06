@@ -1,3 +1,7 @@
+# :construction: Infra has moved :construction:
+
+New repo link: https://github.com/i9or/blog -> `infra` folder.
+
 # Blog Infrastructure
 Some fancy scripts and yamls for my blog infrastructure... gosh just use docker already, Jesus.
 
